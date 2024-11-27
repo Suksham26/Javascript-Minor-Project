@@ -1,0 +1,69 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        HTML Input Type Color
+    </title>
+</head>
+
+<body style="text-align:center;">
+
+<h1>Color Picker</h1>
+    
+        <label for="color">Select Color:</label>
+        <input type="color" value="#000000" id="color">
+    
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Color Picker</title>
+</head>
+
+<body style="text-align:center;">
+    <h1>Color Picker</h1>
+    <p>Click the button to open the color picker:</p>
+
+    <!-- Placeholder for the color picker -->
+    <div id="colorPickerContainer"></div>
+
+    <!-- Display the selected color -->
+    <div id="selectedColorDisplay" style="margin-top: 20px; font-size: 18px;">
+        Selected Color: <span id="selectedColor">None</span>
+    </div>
+
+    <!-- Button to create the color picker -->
+    <button id="createPickerButton">Open Color Picker</button>
+
+    <script>
+        const container = document.getElementById('colorPickerContainer');
+        const selectedColor = document.getElementById('selectedColor');
+        const button = document.getElementById('createPickerButton');
+
+        button.addEventListener('click', () => {
+            // Check if the color picker already exists
+            if (!document.getElementById('dynamicColorPicker')) {
+                // Create a new input element of type color
+                const colorPicker = document.createElement('input');
+                colorPicker.type = 'color';
+                colorPicker.id = 'dynamicColorPicker';
+                colorPicker.value = '#000000'; // Default color
+
+                // Add an event listener to update the selected color display
+                colorPicker.addEventListener('input', (event) => {
+                    selectedColor.textContent = event.target.value;
+                    selectedColor.style.color = event.target.value; // Change text color to match selected color
+                });
+
+                // Add the color picker to the container
+                container.appendChild(colorPicker);
+            }
+        });
+    </script>
+</body>
+
+</html>

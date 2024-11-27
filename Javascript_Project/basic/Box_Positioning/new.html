@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Resizing</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            border: 1px solid black;
+            background-color: rgb(10, 10, 10);
+            transition: transform 0.1s, width 0.1s, height 0.1s, background-color 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        const box = document.getElementById('box');
+        let size = 100;  // Initial size
+        const maxSize = 400; // Maximum size
+        const minSize = 50;  // Minimum size
+        const increment = 10; // Increment/Decrement value
+        let isGrowing = true; // State for size direction (grow/shrink)
+
+        // Generate a random color
+        function randomColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        // Update box size
+        function updateSize() {a
+            if (isGrowing) {
+                size += increment;
+                if (size >= maxSize) isGrowing = false; // Switch to shrinking
+            } else {
+                size -= increment;
+                if (size <= minSize) isGrowing = true; // Switch to growing
+            }
+            return size;
+        }
+
+        // Handle click event
+        document.addEventListener('click', (event) => {
+            // Update size and position
+            const newSize = updateSize();
+            box.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+            box.style.width = `${newSize}px`;
+            box.style.height = `${newSize}px`;
+            box.style.backgroundColor = randomColor();
+        });
+    </script>
+</body>
+</html>
